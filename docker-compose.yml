@@ -1,0 +1,39 @@
+services:
+  playwright-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: playwright-runner
+    volumes:
+      - .:/app:delegated # Use delegated for better performance
+      - node_modules_volume:/app/node_modules # Bind `node_modules` to named volume
+      - ./allure-results:/app/allure-results  # Ensure Allure results persist
+      - ./data:/app/data  # Bind test data to container
+    working_dir: /app
+    ports:
+      - "3000:3000"  # Map host port 3000 to container port 3000
+      - "8080:8080" # Map host port 8080 to container port 8080
+    environment:
+      - CI=true  # Ensure Playwright runs in CI-friendly mode
+    command: ["npx", "playwright", "test", "--ui", "--ui-host=0.0.0.0", "--ui-port=8080"] # run in UI mode
+    #command: ["npm", "run", "test"] # run in headless mode
+ 
+  allure-server:
+    image: frankescobar/allure-docker-service
+    container_name: allure-server
+    user: root  # Run as root to avoid permission issues
+    ports:
+      - "5050:5050"
+    environment:
+      CHECK_RESULTS_EVERY_SECONDS: 10            # Check for new results every 10 seconds
+      KEEP_HISTORY: "true"                       # Preserve history between test runs
+      HISTORY_MAX_RUNS: 10                       # Limit the number of history runs to keep
+      PROJECTS_DIRECTORY: "/app/allure-results"  # Location of allure-results folder
+      ENABLE_CORS: "true"                        # Allow cross-origin requests if needed
+    volumes:
+      - ./allure-results:/app/allure-results  # Ensure Allure can access reports
+      - ./allure-report:/app/allure-report  # Persist reports
+      - ./allure-report/history:/app/allure-report/history  # Store history of previous runs
+
+volumes:
+  node_modules_volume:

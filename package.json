@@ -1,0 +1,24 @@
+{
+  "name": "playwright-tests",
+  "version": "1.0.0",
+  "description": "Automated testing with Playwright and TypeScript",
+  "type": "module",
+  "scripts": {
+    "test": "npx playwright test && npm run allure:generate",
+    "test:headed": "npx playwright test --headed && npm run allure:generate",
+    "test:debug": "npx playwright test --debug && npm run allure:generate",
+    "allure:generate": "npx allure generate allure-results -o allure-report",
+    "allure:open": "npx allure open allure-report"
+  },
+  "dependencies": {
+    "googleapis": "^121.0.0",
+    "open": "^9.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.42.0",
+    "@types/node": "^18.0.0",
+    "allure-playwright": "^2.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.0.0"
+  }
+}
