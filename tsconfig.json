@@ -8,9 +8,11 @@
       "resolveJsonModule": true,
       "isolatedModules": true,
       "noEmit": true,
-      "skipLibCheck": true
+      "skipLibCheck": true,
+      "esModuleInterop": true
     },
-    "include": ["auth.ts", "gmail.ts"],  // ✅ Ensure gmail.ts is included
+    "include": [
+      "auth/example.ts", "gmail.ts"],  // ✅ Ensure gmail.ts is included
     "exclude": ["node_modules"]
   }
   

@@ -5,3 +5,7 @@ playwright-report
 test-results
 data
 keys
+.env
+
+/auth/google-credentials/token.json
+/auth/google-credentials/credentials.json

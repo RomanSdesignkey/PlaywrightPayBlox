@@ -23,12 +23,12 @@ test.describe('E-commerce tests', () => {
       document.body.appendChild(cursor);
 
       // Track mouse movement
-      document.addEventListener('mousemove', (event) => {
+      document.addEventListener('mousemove', event => {
         cursor.style.transform = `translate(${event.clientX - 5}px, ${event.clientY - 5}px)`;
       });
 
       // Click effect
-      document.addEventListener('click', (event) => {
+      document.addEventListener('click', event => {
         const circle = document.createElement('div');
         circle.style.position = 'absolute';
         circle.style.width = '20px';
@@ -49,7 +49,9 @@ test.describe('E-commerce tests', () => {
 
   test('should add a product to the cart', async ({ page }) => {
     // Set test metadata for Allure
-    allure.description('Test to verify that adding a product to the cart works correctly');
+    allure.description(
+      'Test to verify that adding a product to the cart works correctly',
+    );
     allure.severity('critical');
 
     await allure.step('Wait for homepage to fully load', async () => {

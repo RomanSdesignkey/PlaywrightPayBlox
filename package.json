@@ -2,8 +2,8 @@
   "name": "playwright-tests",
   "version": "1.0.0",
   "description": "Automated testing with Playwright and TypeScript",
-  "type": "module",
   "scripts": {
+    "gen-gmail-tokens": "tsx ./scripts/generate-gmail-tokens.ts",
     "test": "npx playwright test && npm run allure:generate",
     "test:headed": "npx playwright test --headed && npm run allure:generate",
     "test:debug": "npx playwright test --debug && npm run allure:generate",
@@ -11,14 +11,26 @@
     "allure:open": "npx allure open allure-report"
   },
   "dependencies": {
-    "googleapis": "^121.0.0",
-    "open": "^9.0.0"
+    "@google-cloud/local-auth": "^3.0.1",
+    "google-auth-library": "^10.1.0",
+    "googleapis": "^150.0.1",
+    "open": "^10.1.2"
   },
   "devDependencies": {
-    "@playwright/test": "^1.42.0",
-    "@types/node": "^18.0.0",
-    "allure-playwright": "^2.0.0",
+    "@eslint/js": "^9.30.1",
+    "@playwright/test": "^1.53.2",
+    "@types/node": "^24.0.10",
+    "allure-playwright": "^3.3.0",
+    "eslint": "^9.30.1",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.5.1",
+    "prettier": "^3.6.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.0.0"
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.35.1"
+  },
+  "overrides": {
+    "google-auth-library": "^10.1.0"
   }
 }

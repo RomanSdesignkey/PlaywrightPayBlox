@@ -1,7 +1,9 @@
 import { test, expect } from '@playwright/test';
 import { allure } from 'allure-playwright';
 
-test('Run a WebPageTest performance test with browser config', async ({ page }, testInfo) => {
+test('Run a WebPageTest performance test with browser config', async ({
+  page,
+}, testInfo) => {
   try {
     allure.label('Component', 'WebPageTest');
     allure.description('This test automates performance testing using WebPageTest.');
@@ -39,7 +41,9 @@ test('Run a WebPageTest performance test with browser config', async ({ page }, 
 
     await test.step('Check for Errors', async () => {
       const errorBox = page.locator('.testerror');
-      const isErrorVisible = await errorBox.isVisible({ timeout: 5000 }).catch(() => false);
+      const isErrorVisible = await errorBox
+        .isVisible({ timeout: 5000 })
+        .catch(() => false);
 
       if (isErrorVisible) {
         console.error('Test failed: Error box detected on the page.');
@@ -58,7 +62,6 @@ test('Run a WebPageTest performance test with browser config', async ({ page }, 
       await expect(resultsHeading).toBeVisible();
       allure.attachment('Results Page Screenshot', await page.screenshot(), 'image/png');
     });
-
   } catch (error) {
     await page.screenshot({ path: testInfo.outputPath('failure.png') });
     allure.attachment('Failure Screenshot', await page.screenshot(), 'image/png');
