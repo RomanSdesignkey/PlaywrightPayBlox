@@ -42,6 +42,15 @@ export class GmailAuthService {
 
     console.log('No saved client found, creating new one');
 
+    const isCredentialsFileExist = await checkFileExists(this.credentialsPath);
+
+    if (!isCredentialsFileExist) {
+      throw new Error(
+        `Credentials file does not exist, create one in '${this.credentialsPath}' following the instructions:` +
+          'https://developers.google.com/workspace/gmail/api/quickstart/nodejs#enable_the_api',
+      );
+    }
+
     const newClient = await authenticate({
       scopes: this.scopes,
       keyfilePath: this.credentialsPath,
